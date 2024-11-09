@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+	float  ratio[20],weight[20],profit[20];
+	int n,i,temp,cap,total_val=0,j,k;
+	
+	printf("Enter total number of items : ");
+	scanf("%d", &n);
+	
+	for(i=0;i<n;i++)
+	{
+		printf("Enter weight and profit of the item %d : ",i);
+		scanf("%f %f", &weight[i], &profit[i]);
+	}
+	
+	printf("Enter capacity of knapsack : ");
+	scanf("%d", &cap);
+	
+	for(i=0;i<n;i++)
+	{
+		ratio[i]=profit[i]/weight[i];
+	}
+		
+		for(k=0;k<n;k++)
+		{
+			for(j=k+1;j<n;j++)
+			{
+				if(ratio[k]<ratio[j])
+				{
+					//sorting weight ratio and profits
+					temp=ratio[j];
+					ratio[j]=ratio[k];
+					ratio[k]=temp;
+					
+					temp=weight[j];
+					weight[j]=weight[k];
+					weight[k]=temp;
+					
+					temp=profit[j];
+					profit[j]=profit[k];
+					profit[k]=temp;
+				}
+			}
+		}
+		for(i=0;i<n;i++)
+		printf("At index %d weight : %f profit : %f ratio : %f \n",i,weight[i], profit[i], ratio[i]);
+	
+	
+	printf("After solving with Greedy algorithm we get : ");
+	for(i=0;i<n;i++)
+	{
+		if(weight[i]>cap)
+		{
+			break;
+		}
+		else
+		{
+			printf(" weight : %f profit : %f \n",weight[i], profit[i]);
+			total_val+=profit[i];
+			cap-=weight[i];
+		}
+	}
+	
+	if(i<n)
+	{
+		total_val+=(ratio[i]*cap);
+	}
+	
+	printf("Max Profit = %d \n", total_val);
+	
+	return 0;
+}

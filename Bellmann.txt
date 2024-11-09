@@ -1,0 +1,96 @@
+#include<iostream>
+using namespace std;
+/*onst int MAX=1000;
+
+struct graph
+{
+	int src;
+	int dest;
+	int weight;
+};
+
+void bellman(graph edges[], int vertices, int edgescount, int source) 
+{
+	int dist[MAX];
+	for(int i=1; i<vertices; i++)
+	{
+		dist[i]=999;
+	}
+	
+	dist[source]=0;
+	
+	for(int i=1; i<=(vertices-1); i++)
+	{
+		for(int j=0; j<edgescount; j++)
+		{
+			int u = edges[j].src;
+			int v = edges[j].dest;
+			int wt = edges[j].weight;
+			
+			if(dist[u] != 999 && dist[u] + wt < dist[v])
+			{
+				dist[v] = dist[u] + wt;
+			}
+		}
+	}
+	
+	for (int i = 0; i < edgescount; ++i) 
+	{
+        int u = edges[i].src;
+        int v = edges[i].dest;
+        int wt = edges[i].weight;
+        if (dist[u] != 999 && dist[u] + wt < dist[v]) 
+        	{
+       		     cout << "Negative cycle detected" << endl;
+            		return;
+       		}
+    	}
+	
+	cout<<"\nVertex:\tDist from Source:\n";
+	for(int i=1;i<=vertices;i++)
+	{
+		if(dist[i]==999)
+		{
+			cout<<i<<"\tInfinite"<<endl;
+		}
+		else
+		{
+			cout<<i<<"\t"<<dist[i]<<endl;
+		}
+	}
+}
+
+int main()
+{
+	int vertices, edgescount,source;
+	
+	cout<<"\nEnter the total number of vertices : ";
+	cin>>vertices;
+	cout<<"\nEnter total number of edges : ";
+	cin>>edgescount;
+	cout<<"\nEnter edgs in [source dstination edgevalue] format";
+	
+	graph edges[edgescount];
+	
+	for(int i=0;i<edgescount;i++)
+	{
+		cout<<"\nEnter Edges : ";
+		cin>>edges[i].src>>edges[i].dest>>edges[i].weight;
+	}	
+	
+	cout<<"\nSelect the source node : ";
+	cin>>source;
+	
+	bellman(edges, vertices, edgescount, source);
+	
+	/*int vertices = 5;
+	int edgescount = 6;
+	graph edges[] = {
+		{0, 1, 5}, {0, 2, 6}, {3, 1, -4},
+        {1, 4, -3}, {2, 3, 7}, {4, 3, -8}
+	};
+	
+	bellman(edges, vertices, edgescount, 0);
+	
+	return 0;*/
+}
